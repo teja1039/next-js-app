@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+}
+
+.page-body {
+  height: calc(100% - 24px);
+}
+
+.page-link {
+  cursor: pointer;
+  border-radius: 4px;
+  height: 24px;
+  align-self: center;
+
+  &:hover {
+    background-color: #464545;
+  }
+}
+
+.nav-bar {
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 1px white solid;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.follow-btn {
+  border-radius: 4px;
+  background-color: #6161b5;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
