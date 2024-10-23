@@ -4,16 +4,32 @@ import { unfollowCharacter } from "@/mutations/unfollow";
 import { getCharacterById } from "@/queries/characterById";
 import { getCharacterIds } from "@/queries/characters";
 import { getFollowedCharacterIds } from "@/queries/followedCharacters";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   character: any;
   following: boolean;
 }
 
-const CharacterPage: React.FC<Props> = ({ character, following }) => {
-  const [isFollowing, setIsFollowing] = useState(following);
+const CharacterPage: React.FC<Props> = ({ character }) => {
+  const [loading, setLoading] = useState(true);
+  const [isFollowing, setIsFollowing] = useState(null);
   const [error, setError] = useState(null);
+  
+  useEffect(() => {
+    const setFollowStatus = async () => {
+      try {
+        const followedCharacters = await getFollowedCharacterIds();
+        setIsFollowing(followedCharacters.includes(character.id));
+      } catch( error ) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    setFollowStatus();
+  },[])
 
   const handleFollow = async () => {
     if (isFollowing) {
@@ -33,6 +49,7 @@ const CharacterPage: React.FC<Props> = ({ character, following }) => {
     }
   };
 
+  if (loading) return <div>Loading...</div>
   if (error) return <div>Error : {error.message}</div>;
 
   return (
@@ -49,13 +66,10 @@ const CharacterPage: React.FC<Props> = ({ character, following }) => {
 export const getStaticProps = async (context) => {
   const { id } = context.params;
   const { character } = await getCharacterById({id});
-  const followedCharacters = await getFollowedCharacterIds();
-  const following = followedCharacters.includes(id);
 
   return {
     props: {
       character,
-      following,
     },
   };
 };
