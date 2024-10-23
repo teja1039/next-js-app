@@ -14,12 +14,30 @@ const CHARACTERS_LIST_QUERY = gql`
   }
 `;
 
+const CHARACTERS_ID_LIST_QUERY = gql`
+  query characters {
+    characters {
+      results {
+        id
+      }
+    }
+  }
+`;
+
+export const getCharacterIds = async () => {
+  const client = apolloClient();
+  const { data } = await client.query({
+    query: CHARACTERS_ID_LIST_QUERY,
+  });
+
+  return data.characters.results;
+};
 export const getCharacters = async () => {
-    const client = apolloClient();
+  const client = apolloClient();
 
   const { data } = await client.query({
     query: CHARACTERS_LIST_QUERY,
   });
 
-  return data;
-}
+  return data.characters.results;
+};

@@ -12,9 +12,7 @@ const CHARACTERS_LOOKUP_QUERY = gql`
   }
 `;
 
-export const getFollowedCharacters = async () => {
-    const client = apolloClient();
-
+export const getFollowedCharacterIds = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/follow`,
     {
@@ -27,6 +25,13 @@ export const getFollowedCharacters = async () => {
 
   const { storedData: followedCharacters } = await response.json();
 
+  return followedCharacters;
+}
+
+export const getFollowedCharacters = async () => {
+    const client = apolloClient();
+
+  const followedCharacters = await getFollowedCharacterIds();
   let result = [];
 
   if (followedCharacters.length) {

@@ -23,7 +23,7 @@ const CHARACTER_QUERY = gql`
 `;
 
 export const getCharacterById = async ({ id }) => {
-    const client = apolloClient();
+  const client = apolloClient();
 
   const { data } = await client.query({
     query: CHARACTER_QUERY,

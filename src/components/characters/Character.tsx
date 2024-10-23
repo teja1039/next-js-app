@@ -2,10 +2,11 @@ import Image from "next/image";
 
 const _NOOP = () => {};
 
-export const Character = ({ character, onFollow = _NOOP }) => {
+export const Character = ({ character, isFollowing ,onFollow = _NOOP }) => {
     const { image, name, status, location, gender, species, type, origin } =
     character;
 
+    const buttonName = isFollowing ? "Unfollow" : "Follow";
     return (
         <div className="p-4 h-full w-full flex flex-row flex-wrap gap-4 justify-center">
           <Image
@@ -40,7 +41,7 @@ export const Character = ({ character, onFollow = _NOOP }) => {
             </div>
             <span>
               <button onClick={onFollow} className="flex px-1 follow-btn">
-                Follow
+                {buttonName}
               </button>
             </span>
           </div>
