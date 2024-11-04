@@ -6,11 +6,11 @@ import "@/styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <ApolloProvider client={apolloClient()}>
+    <ApolloProvider client={apolloClient()}>
+      <Layout>
         <Component {...pageProps} />
-      </ApolloProvider>
-    </Layout>
+      </Layout>
+    </ApolloProvider>
   );
 }
 

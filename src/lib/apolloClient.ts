@@ -4,7 +4,7 @@ import {
 } from "@apollo/client";
 
 // named request
-const MY_BASE_URL = "https://rickandmortyapi.com/graphql";
+const MY_BASE_URL = "http:localhost:8080/graphql";
 // const httpLink = new HttpLink({ uri: MY_BASE_URL });
 // const namedLink = new ApolloLink((operation, forward) => {
 //   operation.setContext(() => ({

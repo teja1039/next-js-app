@@ -76,7 +76,7 @@ export const getStaticProps = async (context) => {
 
 export const getStaticPaths = async () => {
   const characterIdList = await getCharacterIds();
-
+  console.log(characterIdList);
   const paths = characterIdList.map(({id}) => ({
     params: {
       id,

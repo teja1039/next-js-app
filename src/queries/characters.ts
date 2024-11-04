@@ -4,12 +4,10 @@ import apolloClient from "../lib/apolloClient";
 const CHARACTERS_LIST_QUERY = gql`
   query characters {
     characters {
-      results {
-        id
-        name
-        image
-        species
-      }
+      id
+      name
+      image
+      species
     }
   }
 `;
@@ -17,9 +15,7 @@ const CHARACTERS_LIST_QUERY = gql`
 const CHARACTERS_ID_LIST_QUERY = gql`
   query characters {
     characters {
-      results {
-        id
-      }
+      id
     }
   }
 `;
@@ -30,7 +26,7 @@ export const getCharacterIds = async () => {
     query: CHARACTERS_ID_LIST_QUERY,
   });
 
-  return data.characters.results;
+  return data.characters;
 };
 export const getCharacters = async () => {
   const client = apolloClient();
@@ -39,5 +35,5 @@ export const getCharacters = async () => {
     query: CHARACTERS_LIST_QUERY,
   });
 
-  return data.characters.results;
+  return data.characters;
 };
